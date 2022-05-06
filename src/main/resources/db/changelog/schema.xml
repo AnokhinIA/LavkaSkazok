@@ -1,0 +1,38 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="Igor Anokhin" id="Create-table-tales">
+    <preConditions>
+        <not>
+            <tableExists tableName="tales"/>
+        </not>
+    </preConditions>
+        <createTable tableName="tales">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="date" type="date">
+                <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="title" type="varchar(100)">
+                <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="annonce" type="text">
+                <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="body" type="text">
+                <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="image" type="varchar(50)">
+                <constraints nullable="true" unique="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+
+
+
+</databaseChangeLog>

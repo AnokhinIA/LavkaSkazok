@@ -1,0 +1,36 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="Igor Anokhin" id="Create-table-user">
+        <preConditions>
+            <not>
+                <tableExists tableName="user"/>
+            </not>
+        </preConditions>
+        <createTable tableName="user">
+            <column name="ID" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="LOGIN" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="PASSWORD" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="STATUS" type="INT(1)" defaultValue="1">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Igor Anokhin" id="Populate-table-role-and-user">
+        <insert tableName="user">
+            <column name="LOGIN" value="admin" />
+            <!--password: admin -->
+            <column name="PASSWORD" value="$2a$10$Gq4Gjp73EBMFcm4Bq5G7i..XCUfMif5u69EvJKCaJlNVzvzZb2lVO" />
+        </insert>
+    </changeSet>
+</databaseChangeLog>

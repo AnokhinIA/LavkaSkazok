@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:insert="~{index :: head}"></head>
+
+<body id="scroll-top">
+  <!-- mobile menu start here -->
+  <div th:insert="~{index :: mobile-menu-area}" class="mobile-menu-area"></div>
+  <!-- mobile menu ending here -->
+
+  <header th:insert="~{index :: header}"></header>
+  <!-- header End here -->
+
+
+  <!-- Page Header Start here -->
+  <section class="page-header section-notch">
+    <div class="overlay">
+      <div class="container">
+        <h3>Панель администратора</h3>
+        <ul>
+          <li><a th:href="@{/}">На главную</a></li>
+          <li>-</li>
+          <li>-</li>
+        </ul>
+      </div>
+      <div class="loginPanel" sec:authorize="isAuthenticated()">
+        <p>Вы зашли в административную панель по логином:
+          <span class="loginName" sec:authentication="name"></span>
+        </p>
+        <div class="logoutButton">
+          <a th:href="@{/logout}"><img title="Выйти:" th:src="@{/images/icons/box-arrow-right.svg}" widh="40" high="40"/></a>
+        </div>
+      </div><!-- container -->
+    </div><!-- overlay -->
+  </section><!-- page header -->
+  <!-- Page Header End here -->
+
+
+  <!-- Blog Post Start here -->
+  <section class="blog-post padding-120">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="single-post">
+            <div class="post-image">
+              <img src="images/blog/post_01.jpg" alt="post image" class="img-responsive">
+            </div>
+            <div class="post-content">
+              <h3>Перечень сказок.</h3>
+
+              <p>Здесь будет список сказок</p>
+
+            </div>
+
+            <div class="reply-form">
+              <h3>Добавить сказку</h3>
+
+              <form>
+                <div class="row">
+                  <div class="col-md-4 col-sm-4 col-xs-12">
+                    <input type="text" name="name" placeholder="Name*" class="com-input">
+                  </div>
+                  <div class="col-md-4 col-sm-4 col-xs-12">
+                    <input type="email" name="email" placeholder="Email*" class="com-input">
+                  </div>
+                  <div class="col-md-4 col-sm-4 col-xs-12">
+                    <input type="text" name="website" placeholder="Website" class="com-input">
+                  </div>
+                </div>
+                <textarea rows="6" class="com-input">Comments*</textarea>
+                <button class="button-default">Submit Comment</button>
+              </form>
+            </div>
+          </div><!-- single post -->
+        </div>
+
+
+  <!-- Subscribe Start here -->
+  <section class="subscribe" th:insert="~{index :: subscribe}"></section>
+   <!-- Subscribe End here -->
+
+
+  <!-- Footer Start here -->
+  <footer th:insert="~{index :: footer}"></footer>
+  <a class="page-scroll scroll-top" href="#scroll-top"><i class="fa fa-angle-up" aria-hidden="true"></i></a>
+  <!-- Footer End here -->
+
+
+  <!-- jquery -->
+  <section th:insert="~{index :: js}"></section>
+
+
+</body>
+
+</html>
