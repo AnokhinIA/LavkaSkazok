@@ -43,7 +43,7 @@
                         <div class="post-content">
                             <h3 th:text="${tale.title}"><a th:href="@{/tale}">Название.</a>
                             </h3>
-                            <p><span>Дата написания: </span><span th:text="${#dates.format(tale.date,'dd-MM-yyyy')}"></span></p>
+                            <p><span>Дата написания: </span><span th:text="${tale.date}"></span></p>
 
                             <p th:text="${tale.annonce}"> Анонс сказки</p>
                             <a th:href="@{/tale/{id}(id = ${tale.id})}" class="button-default post-button">Читать

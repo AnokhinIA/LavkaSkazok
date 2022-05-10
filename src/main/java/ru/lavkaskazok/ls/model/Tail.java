@@ -18,7 +18,7 @@ public class Tail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Date date;
+    private LocalDate date;
     //private String date;
     private String title;
     @Type(type="text")
