@@ -1,7 +1,11 @@
 package ru.lavkaskazok.ls.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import ru.lavkaskazok.ls.paging.Paged;
+import ru.lavkaskazok.ls.paging.Paging;
 import ru.lavkaskazok.ls.dto.TailDto;
 import ru.lavkaskazok.ls.model.Tail;
 import ru.lavkaskazok.ls.repository.TailRepository;
@@ -55,6 +59,12 @@ public class TailService {
     public boolean checkById(long id) {
         boolean enable = tailRepository.existsById(id);
         return enable;
+    }
+
+    public Paged<Tail> getPage(int pageNumber, int size) {
+        PageRequest request = PageRequest.of(pageNumber - 1, size);
+        Page<Tail> postPage = tailRepository.findAll(request); //new Sort(Sort.Direction.ASC, "id") Сортировка не работает
+        return new Paged<>(postPage, Paging.of(postPage.getTotalPages(), pageNumber, size));
     }
 
 }

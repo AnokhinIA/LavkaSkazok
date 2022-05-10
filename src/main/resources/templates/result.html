@@ -16,19 +16,14 @@
 <section class="page-header section-notch">
     <div class="overlay">
         <div class="container">
-            <h3>Панель администратора</h3>
+            <h3>Результат операции</h3>
             <ul>
                 <li><a th:href="@{/}">На главную</a></li>
                 <li>-</li>
                 <li>-</li>
             </ul>
         </div>
-        <div sec:authorize="isAuthenticated()">
-            <h3>LOGIN:<span sec:authentication="name"> </span></h3>
-            <div class="logoutButton">
-               <a th:href="@{/logout}" class="button-default post-button">Выйти:</a>
-            </div>
-        </div><!-- container -->
+        <!-- container -->
     </div><!-- overlay -->
 </section><!-- page header -->
 <!-- Page Header End here -->
@@ -41,7 +36,7 @@
             <div class="col-lg-8">
                 <div class="single-post">
                     <div class="post-content">
-                        <p>В разделе "СКАЗКИ" доступен фунекционал добавления и редактирования сказок.</p>
+                        <p>В разделе "СКАЗКИ" доступен функционал добавления и редактирования сказок.</p>
                     </div>
 
 

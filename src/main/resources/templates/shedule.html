@@ -16,18 +16,12 @@
 <section class="page-header section-notch">
     <div class="overlay">
         <div class="container">
-            <h3>Панель администратора</h3>
+            <h3>Расписание</h3>
             <ul>
                 <li><a th:href="@{/}">На главную</a></li>
                 <li>-</li>
                 <li>-</li>
             </ul>
-        </div>
-        <div sec:authorize="isAuthenticated()">
-            <h3>LOGIN:<span sec:authentication="name"> </span></h3>
-            <div class="logoutButton">
-               <a th:href="@{/logout}" class="button-default post-button">Выйти:</a>
-            </div>
         </div><!-- container -->
     </div><!-- overlay -->
 </section><!-- page header -->
@@ -40,23 +34,40 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="single-post">
-                    <div class="post-content">
-                        <p>В разделе "СКАЗКИ" доступен фунекционал добавления и редактирования сказок.</p>
+                    <div class="post-image">
+                        <!--img src="/images/blog/post_01.jpg" alt="post image" class="img-responsive"-->
                     </div>
-
+                    <div class="post-content">
+                        <iframe src="https://calendar.google.com/calendar/embed?src=59i0ceqp8io0mmiflhrpm2336s%40group.calendar.google.com&ctz=Europe%2FMoscow"
+                                style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+                    </div>
 
                 </div><!-- single post -->
             </div>
+            <div class="col-lg-4">
+                <div class="sidebar">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Blog Post End here -->
 
 
-            <!-- Footer Start here -->
-            <footer th:insert="~{index :: footer}"></footer>
-            <a class="page-scroll scroll-top" href="#scroll-top"><i class="fa fa-angle-up" aria-hidden="true"></i></a>
-            <!-- Footer End here -->
+<!-- Subscribe Start here -->
+<section class="subscribe" th:insert="~{index :: subscribe}"></section>
+<!-- Subscribe End here -->
 
 
-            <!-- jquery -->
-            <section th:insert="~{index :: js}"></section>
+<!-- Footer Start here -->
+<footer th:insert="~{index :: footer}"></footer>
+<a class="page-scroll scroll-top" href="#scroll-top"><i class="fa fa-angle-up" aria-hidden="true"></i></a>
+<!-- Footer End here -->
+
+
+<!-- jquery -->
+<section th:insert="~{index :: js}"></section>
 
 
 </body>

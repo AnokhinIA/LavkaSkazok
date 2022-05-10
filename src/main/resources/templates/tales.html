@@ -1,20 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head th:insert="~{index :: head}"></head>
 
-
 <body id="scroll-top">
-
 
 <!-- mobile menu start here -->
 <div th:insert="~{index :: mobile-menu-area}" class="mobile-menu-area"></div>
 <!-- mobile menu ending here -->
 
-
 <header th:insert="~{index :: header}"></header>
 <!-- header End here -->
-
 
 <!-- Page Header Start here -->
 <section class="page-header section-notch">
@@ -35,60 +31,41 @@
 <!-- Blog Post Start here -->
 <section class="blog-post padding-120">
     <div class="container">
+        <a sec:authorize="isAuthenticated()" th:href="@{/tale/new}" class="button-default post-button">Создать новую</a>
         <div class="row">
             <div class="col-lg-8 post-item-pagination">
-                <div class="post-items">
+                <div class="post-items" th:each="tale: ${tales}">
                     <div class="post-item">
                         <div class="post-image">
-                            <a href="single.html"><img src="images/blog/post_01.jpg" alt="post image"
+                            <a href="single.html"><img src="/images/blog/post_01.jpg" alt="post image"
                                                        class="img-responsive"></a>
                         </div>
                         <div class="post-content">
-                            <h3><a th:href="@{/tale}">Как Счастливчик нашел свое счастье.</a></h3>
-                            <!--ul class="post-meta">
-                              <li><span class="icon flaticon-people-1"></span> <a href="#">Robot Smith</a></li>
-                              <li><span class="icon flaticon-like"></span> <a href="#">128 Likes</a></li>
-                              <li><span class="icon flaticon-chat"></span> <a href="#">32 Comments</a></li>
-                            </ul-->
-                            <p>Жил-был на свете один очень грустный человек, которого звали, не поверите, Счастливчиком.
-                                Все у него не ладилось, всем он был не доволен, ворчал и что-то частенько бормотал себе
-                                под нос.
-                                И, как это ни грустно, никто с ним не дружил. «Конечно, кто будет дружить с таким
-                                недотепой, как я,
-                                бу-бу-бу», – вздыхал Счастливчик.</p>
-                            <a th:href="@{/tale}" class="button-default post-button">Читать дальше</a>
+                            <h3 th:text="${tale.title}"><a th:href="@{/tale}">Название.</a>
+                            </h3>
+                            <p><span>Дата написания: </span><span th:text="${tale.date}"></span></p>
+
+                            <p th:text="${tale.annonce}"> Анонс сказки</p>
+                            <a th:href="@{/tale/{id}(id = ${tale.id})}" class="button-default post-button">Читать
+                                дальше</a>
+                            <a sec:authorize="isAuthenticated()" th:href="@{/tale/edit/{id}(id = ${tale.id})}"
+                               class="button-default post-button">Редактировать</a>
+                            <a sec:authorize="isAuthenticated()" th:href="@{/tale/delete/{id}(id = ${tale.id})}"
+                               class="button-default post-button" onclick="deleteConfirm(event)">Удалить</a>
                         </div>
                     </div>
-                    <!-- post item -->
-                    <!--div class="post-item">
-                      <div class="post-image">
-                        <a href="single.html"><img src="images/blog/post_02.jpg" alt="post image" class="img-responsive"></a>
-                      </div>
-                      <div class="post-content">
-                        <h3><a href="single.html">Asertivelly recaptiualize best rofesionally</a></h3>
-                        <ul class="post-meta">
-                          <li><span class="icon flaticon-people-1"></span> <a href="#">Robot Smith</a></li>
-                          <li><span class="icon flaticon-like"></span> <a href="#">128 Likes</a></li>
-                          <li><span class="icon flaticon-chat"></span> <a href="#">32 Comments</a></li>
-                        </ul>
-                        <p>Asertively recaptiualize business benefits rofesionally timely data with and premium timely with
-                          premium products sertively recaptiualize business benefits rofesionally timely data an with and
-                          premium timely awesome premium products.</p>
-                        <a href="single.html" class="button-default post-button">Read More</a>
-                      </div>
-                    </div--><!-- post item -->
-
-                    <ul class="pagination">
-                        <li><a href="#"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a></li>
-                        <li><a href="#" class="active">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
-                    </ul>
                 </div>
 
+                <!-- Button trigger modal -->
+                <ul class=" pagination">
+                    <li><a href="#"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a></li>
+                    <li><a href="#" class="active">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
+                </ul>
             </div>
             <div class="col-lg-4">
                 <div class="sidebar">
@@ -98,7 +75,8 @@
                         <ul class="sidebar-posts">
                             <li>
                                 <div class="image">
-                                    <a href="single.html"><img src="images/blog/latest_post_01.jpg" alt="post image"
+                                    <a href="single.html"><img src="images/blog/latest_post_01.jpg"
+                                                               alt="post image"
                                                                class="img-responsive"></a>
                                 </div>
                                 <div class="content">
@@ -109,7 +87,7 @@
                             <li>
                                 <div class="image">
                                     <a href="#"><img src="images/blog/latest_post_02.jpg" alt="post image"
-                                                               class="img-responsive"></a>
+                                                     class="img-responsive"></a>
                                 </div>
                                 <div class="content">
                                     <a href="#">Скоро появится.</a>
@@ -140,6 +118,15 @@
 
 <!-- jquery -->
 <section th:insert="~{index :: js}"></section>
+<script>
+    function deleteConfirm(e) {
+        if (confirm('Удалить?')) {
+            return true;
+        } else {
+            e.preventDefault();
+        }
+    };
+</script>
 
 </body>
 

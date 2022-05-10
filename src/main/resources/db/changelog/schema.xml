@@ -5,11 +5,11 @@
    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
     <changeSet author="Igor Anokhin" id="Create-table-tales">
-    <preConditions>
-        <not>
-            <tableExists tableName="tales"/>
-        </not>
-    </preConditions>
+        <preConditions>
+            <not>
+                <tableExists tableName="tales"/>
+            </not>
+        </preConditions>
         <createTable tableName="tales">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
@@ -17,6 +17,9 @@
             <column name="date" type="date">
                 <constraints nullable="false" unique="false"/>
             </column>
+            <!--column name="date" type="varchar(20)">
+                <constraints nullable="false" unique="false"/>
+            </column-->
             <column name="title" type="varchar(100)">
                 <constraints nullable="false" unique="false"/>
             </column>
@@ -31,8 +34,6 @@
             </column>
         </createTable>
     </changeSet>
-
-
 
 
 </databaseChangeLog>

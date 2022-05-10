@@ -9,7 +9,7 @@ import ru.lavkaskazok.ls.service.TailService;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/admin")
 public class AdminController {
 

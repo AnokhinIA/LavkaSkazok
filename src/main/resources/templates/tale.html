@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:insert="~{index :: head}"></head>
+
+<body id="scroll-top">
+<!-- mobile menu start here -->
+<div th:insert="~{index :: mobile-menu-area}" class="mobile-menu-area"></div>
+<!-- mobile menu ending here -->
+
+<header th:insert="~{index :: header}"></header>
+<!-- header End here -->
+
+
+<!-- Page Header Start here -->
+<section class="page-header section-notch">
+    <div class="overlay">
+        <div class="container">
+            <h3>Добавить сказку</h3>
+            <ul>
+                <li><a th:href="@{/}">На главную</a></li>
+                <li>-</li>
+                <li>-</li>
+            </ul>
+        </div><!-- container -->
+    </div><!-- overlay -->
+</section><!-- page header -->
+<!-- Page Header End here -->
+
+
+<!-- Blog Post Start here -->
+<section class="blog-post padding-120">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="single-post">
+                    <div class="post-image">
+                        <!--img src="/images/blog/post_01.jpg" alt="post image" class="img-responsive"-->
+                    </div>
+                    <div class="post-content">
+                        <form method="post" th:action="@{/tale}" th:object="${tale}">
+                            <label for="date" class="form-label">Дата написания сказки</label>
+                            <input type="text" maxlength="50" class="form-control" name="date" id="date"
+                                   placeholder="" required th:value="${tale.date}">
+                            <span th:if="${#fields.hasErrors('date')}" th:errors="*{tale.date}"></span>
+                            <label for="title" class="form-label">Название</label>
+                            <input type="text" maxlength="255" class="form-control" name="title" id="title"
+                                   placeholder="" required th:value="${tale.title}">
+                            <span th:if="${#fields.hasErrors('title')}" th:errors="*{tale.title}"></span>
+                            <label for="annonce" class="form-label">Анонс</label>
+                            <input type="text" maxlength="500" class="form-control" name="annonce" id="annonce"
+                                   placeholder="" required th:value="${tale.annonce}">
+                            <span th:if="${#fields.hasErrors('annonce')}" th:errors="*{tale.annonce}"></span>
+                            <label for="body" class="form-label">Текст сказки</label>
+                            <textarea rows="20" cols="45" class="form-control" name="body" id="body"
+                                      placeholder="" required th:text="${tale.body}">
+                            </textarea>
+                            <span th:if="${#fields.hasErrors('body')}" th:errors="*{tale.body}"></span>
+                            <input type="text" hidden name="id" id="id" th:value="${tale.id}">
+                            <input type="text" hidden name="status" id="status" th:value="${tale.status}">
+                            <!--input type="hidden" name="_METHOD" value="PUT"/-->
+                            <div class="invalid-feedback" id="source-currency-value-invalid-feedback">
+                                Поле заполнено некорректно
+                            </div>
+                            <div>
+                                <p th:text="${tale.errorMessage}">...</p>
+                            </div>
+                            <div class="row mb-2"></div>
+                            <div class="col-md-6">
+                                <input type="submit" name="action" class="btn btn-success" value="Сохранить"/>
+                            </div>
+                        </form>
+                    </div>
+
+                </div><!-- single post -->
+            </div>
+            <div class="col-lg-4">
+                <div class="sidebar">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Blog Post End here -->
+
+
+<!-- Subscribe Start here -->
+<section class="subscribe" th:insert="~{index :: subscribe}"></section>
+<!-- Subscribe End here -->
+
+
+<!-- Footer Start here -->
+<footer th:insert="~{index :: footer}"></footer>
+<a class="page-scroll scroll-top" href="#scroll-top"><i class="fa fa-angle-up" aria-hidden="true"></i></a>
+<!-- Footer End here -->
+
+<!-- jquery -->
+<section th:insert="~{index :: js}"></section>
+
+</body>
+</html>

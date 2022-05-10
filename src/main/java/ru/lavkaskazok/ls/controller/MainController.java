@@ -32,8 +32,22 @@ public class MainController {
     @GetMapping("/tales")
     public String tales(Model model) {
         List<Tail> tailsList = tailService.findAll();
-        model.addAttribute("tails", tailsList);
+
+        model.addAttribute("tales", tailsList);
         return "tales";
     }
+
+    @GetMapping("/shedule")
+    public String shedule(Model model) {
+        model.addAttribute("content", "некий контент");
+        return "shedule";
+    }
+
+    @GetMapping("/contact")
+    public String contact(Model model) {
+        model.addAttribute("content", "некий контент");
+        return "contact";
+    }
+
 
 }
