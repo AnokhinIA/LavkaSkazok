@@ -40,8 +40,8 @@
                     <div class="post-content">
                         <form method="post" th:action="@{/tale}" th:object="${tale}">
                             <label for="date" class="form-label">Дата написания сказки</label>
-                            <input type="text" maxlength="50" class="form-control" name="date" id="date"
-                                   placeholder="" required th:value="${tale.date}">
+                            <input type="date" class="form-control" name="date" id="date"
+                                   placeholder="" required th:value="${#dates.format(tale.date, 'yyyy-MM-dd')}">
                             <span th:if="${#fields.hasErrors('date')}" th:errors="*{tale.date}"></span>
                             <label for="title" class="form-label">Название</label>
                             <input type="text" maxlength="255" class="form-control" name="title" id="title"
