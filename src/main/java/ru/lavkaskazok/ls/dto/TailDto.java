@@ -18,12 +18,10 @@ import java.util.Date;
 public class TailDto {
     private Long id;
 
-    /* В связи с проблемами десериализации даты пока ставлю значание String*/
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern ="yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate date;
-    //private String date;
     private String title;
     @NonNull
     private String annonce;

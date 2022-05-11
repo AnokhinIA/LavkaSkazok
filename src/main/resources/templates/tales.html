@@ -34,7 +34,7 @@
         <a sec:authorize="isAuthenticated()" th:href="@{/tale/new}" class="button-default post-button">Создать новую</a>
         <div class="row">
             <div class="col-lg-8 post-item-pagination">
-                <div class="post-items" th:each="tale: ${tales}">
+                <div class="post-items" th:each="tale: ${tales.page}">
                     <div class="post-item">
                         <div class="post-image">
                             <a href="single.html"><img src="/images/blog/post_01.jpg" alt="post image"
@@ -57,15 +57,33 @@
                 </div>
 
                 <!-- Button trigger modal -->
-                <ul class=" pagination">
-                    <li><a href="#"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a></li>
-                    <li><a href="#" class="active">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
+                <!--nav aria-label="Page navigation" class="paging"-->
+                <ul class="pagination" th:if="${tales.page.totalPages > 1}">
+                    <li class="page-item" th:classappend="${!tales.paging.isPrevEnabled()? 'disabled' : ''}">
+                        <a class="page-link" th:href="@{'/tales/?pageNumber=' + ${tales.paging.pageNumber - 1}}"
+                           tabindex="-1">
+                            <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <th:block th:each="item : ${tales.paging.getItems()}">
+                        <li class="page-item" th:classappend="${item.index == tales.paging.pageNumber? 'active' : ''}"
+                            th:if="${item.pageItemType.name() == 'PAGE'}">
+                            <a class="page-link" th:href="@{'/tales/?pageNumber=' + ${item.index}}"
+                               th:text="${item.index}">
+
+                            </a>
+                        </li>
+                        <li class="page-item disabled" th:if="${item.pageItemType.name() == 'DOTS'}">
+                            <a class="page-link" href="#"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
+                        </li>
+                    </th:block>
+                    <li class="page-item" th:classappend="${!tales.paging.isNextEnabled()? 'disabled' : ''}">
+                        <a class="page-link" th:href="@{'/tales/?pageNumber=' + ${tales.paging.pageNumber + 1}}">
+                            <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                    </li>
                 </ul>
+                <!--/nav-->
+
             </div>
             <div class="col-lg-4">
                 <div class="sidebar">
@@ -75,7 +93,7 @@
                         <ul class="sidebar-posts">
                             <li>
                                 <div class="image">
-                                    <a href="single.html"><img src="images/blog/latest_post_01.jpg"
+                                    <a href="single.html"><img src="/images/blog/latest_post_01.jpg"
                                                                alt="post image"
                                                                class="img-responsive"></a>
                                 </div>
@@ -86,7 +104,7 @@
                             </li>
                             <li>
                                 <div class="image">
-                                    <a href="#"><img src="images/blog/latest_post_02.jpg" alt="post image"
+                                    <a href="#"><img src="/images/blog/latest_post_02.jpg" alt="post image"
                                                      class="img-responsive"></a>
                                 </div>
                                 <div class="content">

@@ -5,10 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import ru.lavkaskazok.ls.model.Tail;
+import org.springframework.web.bind.annotation.RequestParam;
 import ru.lavkaskazok.ls.service.TailService;
-import java.util.List;
-
 
 @RequiredArgsConstructor
 @Controller
@@ -30,10 +28,10 @@ public class MainController {
     }
 
     @GetMapping("/tales")
-    public String tales(Model model) {
-        List<Tail> tailsList = tailService.findAll();
-
-        model.addAttribute("tales", tailsList);
+    public String tales(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") int pageNumber,
+                        @RequestParam(value = "size", required = false, defaultValue = "3") int size, Model model) {
+        if (pageNumber <= 0) pageNumber = 1;
+        model.addAttribute("tales", tailService.getPage(pageNumber, size));
         return "tales";
     }
 

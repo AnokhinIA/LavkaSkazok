@@ -1,7 +1,5 @@
 package ru.lavkaskazok.ls.controller;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.lavkaskazok.ls.dto.TailDto;
 import ru.lavkaskazok.ls.model.Tail;
 import ru.lavkaskazok.ls.service.TailService;
+
 import javax.validation.Valid;
 
 import java.util.List;
@@ -22,7 +21,7 @@ public class TailController {
     private TailService tailService;
 
     @GetMapping("delete/{id}")
-    public String deleteTail(@PathVariable("id") String id){
+    public String deleteTail(@PathVariable("id") String id) {
         long idTale = Long.parseLong(id);
         if (tailService.checkById(idTale)) {
             tailService.delete(idTale);
@@ -35,22 +34,21 @@ public class TailController {
     public String tailSave(@Valid TailDto tailDto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             tailDto.setErrorMessage(String.valueOf(bindingResult.getFieldError()));
-            model.addAttribute("tale",tailDto);
+            model.addAttribute("tale", tailDto);
             return "tale";
         }
-        if(tailDto.isStatus()){
+        if (tailDto.isStatus()) {
             tailService.edit(tailDto);
             List<Tail> tails = tailService.findAll();
             model.addAttribute("tales", tails);
-        }else {
-            try
-            {
+        } else {
+            try {
                 tailService.add(tailDto);
                 List<Tail> tails = tailService.findAll();
                 model.addAttribute("tales", tails);
-            }catch (Exception e){
+            } catch (Exception e) {
                 tailDto.setErrorMessage(e.getMessage());
-                model.addAttribute("tale",tailDto);
+                model.addAttribute("tale", tailDto);
                 return "tale";
             }
 
@@ -58,10 +56,8 @@ public class TailController {
         return "redirect:/tales";
     }
 
-
-
     @GetMapping("edit/{id}")
-    public String editForm(@PathVariable("id") String id, Model model){
+    public String editForm(@PathVariable("id") String id, Model model) {
         long idTail = Long.parseLong(id);
         if (tailService.checkById(idTail)) {
             Tail tail = (Tail) tailService.findById(idTail).get();
@@ -80,26 +76,26 @@ public class TailController {
     }
 
     @GetMapping("/new")
-    public String newForm(Model model){
-            TailDto tailDto = new TailDto();
-            tailDto.setStatus(false);
-            model.addAttribute("tale", tailDto);
-            return "tale";
+    public String newForm(Model model) {
+        TailDto tailDto = new TailDto();
+        tailDto.setStatus(false);
+        model.addAttribute("tale", tailDto);
+        return "tale";
     }
 
     //TODO В дальнейшем сделать интерфейс для Mapping-а, как на вебинаре №42
     @GetMapping("/{id}")
-    public String view (@PathVariable("id") String id, Model model){
+    public String view(@PathVariable("id") String id, Model model) {
         long idTail = Long.parseLong(id);
         if (tailService.checkById(idTail)) {
-            Tail tail  = (Tail) tailService.findById(idTail).get();
+            Tail tail = (Tail) tailService.findById(idTail).get();
             TailDto tailDto = new TailDto();
             tailDto.setAnnonce(tail.getAnnonce());
             tailDto.setBody(tail.getBody());
             tailDto.setDate(tail.getDate());
             tailDto.setTitle(tail.getTitle());
             tailDto.setImageName(tail.getImage());
-            model.addAttribute("tale",tailDto);
+            model.addAttribute("tale", tailDto);
             return "single";
         }
         return "redirect:/tales";
