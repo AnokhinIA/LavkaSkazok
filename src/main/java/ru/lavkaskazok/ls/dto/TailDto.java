@@ -9,6 +9,7 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import lombok.*;
 
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -17,11 +18,12 @@ import java.util.Date;
 @Getter
 public class TailDto {
     private Long id;
-
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @NonNull
     private LocalDate date;
+    @NonNull @Size(max=100)
     private String title;
     @NonNull
     private String annonce;

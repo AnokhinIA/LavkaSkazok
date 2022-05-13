@@ -56,6 +56,7 @@ public class TailService {
         tail.setImage(tail.getImage());
         tailRepository.save(tail);
     }
+
     public boolean checkById(long id) {
         boolean enable = tailRepository.existsById(id);
         return enable;
