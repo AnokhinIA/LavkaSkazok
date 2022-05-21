@@ -23,7 +23,8 @@ public class TailDto {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @NonNull
     private LocalDate date;
-    @NonNull @Size(max=100)
+    @NonNull
+    @Size(max = 100)
     private String title;
     @NonNull
     private String annonce;

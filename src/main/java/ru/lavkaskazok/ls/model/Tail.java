@@ -13,17 +13,16 @@ import java.util.Date;
 @Setter
 @Getter
 @Entity
-@Table(name="tales")
+@Table(name = "tales")
 public class Tail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDate date;
-    //private String date;
     private String title;
-    @Type(type="text")
+    @Type(type = "text")
     private String annonce;
-    @Type(type="text")
+    @Type(type = "text")
     private String body;
     private String image;
 }

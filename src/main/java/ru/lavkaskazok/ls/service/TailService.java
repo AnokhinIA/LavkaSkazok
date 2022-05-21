@@ -8,7 +8,7 @@ import ru.lavkaskazok.ls.paging.Paged;
 import ru.lavkaskazok.ls.paging.Paging;
 import ru.lavkaskazok.ls.dto.TailDto;
 import ru.lavkaskazok.ls.model.Tail;
-import ru.lavkaskazok.ls.repository.TailRepository;
+import ru.lavkaskazok.ls.repository.TaleRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -18,21 +18,31 @@ import java.util.Optional;
 public class TailService {
 
     @Autowired
-    private TailRepository tailRepository;
+    private TaleRepository taleRepository;
 
     public List<Tail> findAll() {
-        List<Tail> tailsList = tailRepository.findAll();
-        return tailsList;
+        return taleRepository.findAll();
     }
 
     public Optional<?> findById(Long id) {
-        Optional<Tail> insuranceType = tailRepository.findById(id);
-        return insuranceType;
+        if (taleRepository.findById(id).isPresent()) {
+            return taleRepository.findById(id);
+        } else {
+            return Optional.of(new Tail());
+        }
     }
 
     @Transactional
-    public void delete(Long id) {
-        tailRepository.deleteById(id);
+    public String delete(Long id) {
+        if (checkById(id)) {
+            try {
+                taleRepository.deleteById(id);
+                return "Удаление сказки прошло успешно";
+            } catch (Exception e) {
+                return "Операция удаления не удалась. Полный код ошибки: " + e.getMessage();
+            }
+        }
+        return "Такой записи нет";
     }
 
     @Transactional
@@ -43,29 +53,27 @@ public class TailService {
         tail.setDate(tailDto.getDate());
         tail.setTitle(tailDto.getTitle());
         tail.setImage(tail.getImage());
-        tailRepository.save(tail);
+        taleRepository.save(tail);
     }
 
     @Transactional
     public void edit(TailDto tailDto) {
-        Tail tail = (Tail) tailRepository.findById(tailDto.getId()).get();
+        Tail tail = taleRepository.findById(tailDto.getId()).get();
         tail.setAnnonce(tailDto.getAnnonce());
         tail.setBody(tailDto.getBody());
         tail.setDate(tailDto.getDate());
         tail.setTitle(tailDto.getTitle());
         tail.setImage(tail.getImage());
-        tailRepository.save(tail);
+        taleRepository.save(tail);
     }
 
     public boolean checkById(long id) {
-        boolean enable = tailRepository.existsById(id);
-        return enable;
+        return taleRepository.existsById(id);
     }
 
     public Paged<Tail> getPage(int pageNumber, int size) {
         PageRequest request = PageRequest.of(pageNumber - 1, size);
-        Page<Tail> postPage = tailRepository.findAll(request); //new Sort(Sort.Direction.ASC, "id") Сортировка не работает
+        Page<Tail> postPage = taleRepository.findAll(request); //new Sort(Sort.Direction.ASC, "id") Сортировка не работает
         return new Paged<>(postPage, Paging.of(postPage.getTotalPages(), pageNumber, size));
     }
-
 }

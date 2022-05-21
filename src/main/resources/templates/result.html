@@ -17,6 +17,7 @@
     <div class="overlay">
         <div class="container">
             <h3>Результат операции</h3>
+            <h3 th:text = "${message}"></h3>
             <ul>
                 <li><a th:href="@{/}">На главную</a></li>
                 <li>-</li>
@@ -36,7 +37,7 @@
             <div class="col-lg-8">
                 <div class="single-post">
                     <div class="post-content">
-                        <p>В разделе "СКАЗКИ" доступен функционал добавления и редактирования сказок.</p>
+                        <p th:text = "${message}"></p>
                     </div>
 
 
@@ -49,10 +50,11 @@
             <a class="page-scroll scroll-top" href="#scroll-top"><i class="fa fa-angle-up" aria-hidden="true"></i></a>
             <!-- Footer End here -->
 
-
-            <!-- jquery -->
-            <section th:insert="~{index :: js}"></section>
-
+        </div>
+    </div>
+</section>
+    <!-- jquery -->
+    <section th:insert="~{index :: js}"></section>
 
 </body>
 

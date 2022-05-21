@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class LavkaSkazokApplicationRunner {
 
-	public static void main(String[] args) {
-		SpringApplication.run(LavkaSkazokApplicationRunner.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(LavkaSkazokApplicationRunner.class, args);
+    }
 
 }

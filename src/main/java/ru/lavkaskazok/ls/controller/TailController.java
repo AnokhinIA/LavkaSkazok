@@ -21,17 +21,13 @@ public class TailController {
     private TailService tailService;
 
     @GetMapping("delete/{id}")
-    public String deleteTail(@PathVariable("id") String id) {
-        long idTale = Long.parseLong(id);
-        if (tailService.checkById(idTale)) {
-            tailService.delete(idTale);
-            return "redirect:/tales";
-        }
-        return "redirect:/tales";
+    public String deleteTail(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("message", tailService.delete(id));
+        return "result";
     }
 
     @PostMapping
-    public String tailSave(@Valid TailDto tailDto, BindingResult bindingResult, Model model) {
+    public String taleSave(@Valid TailDto tailDto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             tailDto.setErrorMessage(String.valueOf(bindingResult.getFieldError()));
             model.addAttribute("tale", tailDto);
@@ -57,12 +53,11 @@ public class TailController {
     }
 
     @GetMapping("edit/{id}")
-    public String editForm(@PathVariable("id") String id, Model model) {
-        long idTail = Long.parseLong(id);
-        if (tailService.checkById(idTail)) {
-            Tail tail = (Tail) tailService.findById(idTail).get();
+    public String editForm(@PathVariable("id") Long id, Model model) {
+        if (tailService.checkById(id)) {
+            Tail tail = (Tail) tailService.findById(id).get();
             TailDto tailDto = new TailDto();
-            tailDto.setId(idTail);
+            tailDto.setId(id);
             tailDto.setAnnonce(tail.getAnnonce());
             tailDto.setBody(tail.getBody());
             tailDto.setDate(tail.getDate());
@@ -85,10 +80,9 @@ public class TailController {
 
     //TODO В дальнейшем сделать интерфейс для Mapping-а, как на вебинаре №42
     @GetMapping("/{id}")
-    public String view(@PathVariable("id") String id, Model model) {
-        long idTail = Long.parseLong(id);
-        if (tailService.checkById(idTail)) {
-            Tail tail = (Tail) tailService.findById(idTail).get();
+    public String view(@PathVariable("id") Long id, Model model) {
+        if (tailService.checkById(id)) {
+            Tail tail = (Tail) tailService.findById(id).get();
             TailDto tailDto = new TailDto();
             tailDto.setAnnonce(tail.getAnnonce());
             tailDto.setBody(tail.getBody());
