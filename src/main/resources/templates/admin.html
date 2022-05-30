@@ -26,8 +26,16 @@
         <div sec:authorize="isAuthenticated()">
             <h3>LOGIN:<span sec:authentication="name"> </span></h3>
             <div class="logoutButton">
-               <a th:href="@{/logout}" class="button-default post-button">Выйти:</a>
+                <a th:href="@{/logout}" class="button-default post-button">Выйти:</a>
             </div>
+
+        </div><!-- container -->
+        <div sec:authorize="isAuthenticated()">
+            <h3>Редактировать/ добавить мероприятие  или отчет о мероприятии</h3>
+            <div class="button-default">
+                <a th:href="@{/events}" class="button-default post-button">К мероприятиям:</a>
+            </div>
+
         </div><!-- container -->
     </div><!-- overlay -->
 </section><!-- page header -->

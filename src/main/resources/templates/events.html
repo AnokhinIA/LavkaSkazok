@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="~{index :: head}"></head>
+
+<body id="scroll-top">
+
+<!-- mobile menu start here -->
+<div th:insert="~{index :: mobile-menu-area}" class="mobile-menu-area"></div>
+<!-- mobile menu ending here -->
+
+<header th:insert="~{index :: header}"></header>
+<!-- header End here -->
+
+<!-- Page Header Start here -->
+<section class="page-header section-notch">
+    <div class="overlay">
+        <div class="container">
+            <h3>Мероприятия</h3>
+            <ul>
+                <li><a th:href="@{/}">На главную</a></li>
+                <li>-</li>
+                <li>Мероприятия/li>
+            </ul>
+        </div><!-- container -->
+    </div><!-- overlay -->
+</section><!-- page header -->
+<!-- Page Header End here -->
+
+
+<!-- Blog Post Start here -->
+<section class="blog-post padding-120">
+    <div class="container">
+        <a sec:authorize="isAuthenticated()" th:href="@{/event/new}" class="button-default post-button">Создать новую</a>
+        <div class="row">
+            <div class="col-lg-12 post-item-pagination">
+                <div class="post-items" th:each="event: ${events.page}">
+                    <div class="post-item">
+                        <!--div class="post-image">
+                            <a href="single.html"><img src="/images/blog/post_01.jpg" alt="post image"
+                                                       class="img-responsive"></a>
+                        </div-->
+                        <div class="post-content">
+                            <h3 th:text="${event.title}"><a href="#">Название</a>
+                            </h3>
+                            <p><span>Дата события: </span><span th:text="${event.date}"></span></p>
+                            <p th:text="${event.address}"> Адрес мероприятия</p>
+                            <hr>
+                            <p th:text="${event.annonce}"> Анонс мероприятия</p>
+                            <hr>
+                            <p th:text="${event.type}"> Тип мероприятия</p>
+                            <hr>
+                            <hr>
+                            <p th:text="${event.report}"> Адрес мероприятия</p>
+                            <a th:href="@{/event/{id}(id = ${event.id})}" class="button-default post-button">Читать
+                                дальше</a>
+                            <a sec:authorize="isAuthenticated()" th:href="@{/event/edit/{id}(id = ${event.id})}"
+                               class="button-default post-button">Редактировать</a>
+                            <a sec:authorize="isAuthenticated()" th:href="@{/event/delete/{id}(id = ${event.id})}"
+                               class="button-default post-button" onclick="deleteConfirm(event)">Удалить</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Button trigger modal -->
+                <!--nav aria-label="Page navigation" class="paging"-->
+                <ul class="pagination" th:if="${events.page.totalPages > 1}">
+                    <li class="page-item" th:classappend="${!events.paging.isPrevEnabled()? 'disabled' : ''}">
+                        <a class="page-link" th:href="@{'/tales/?pageNumber=' + ${events.paging.pageNumber - 1}}"
+                           tabindex="-1">
+                            <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <th:block th:each="item : ${events.paging.getItems()}">
+                        <li class="page-item" th:classappend="${item.index == events.paging.pageNumber? 'active' : ''}"
+                            th:if="${item.pageItemType.name() == 'PAGE'}">
+                            <a class="page-link" th:href="@{'/events/?pageNumber=' + ${item.index}}"
+                               th:text="${item.index}">
+
+                            </a>
+                        </li>
+                        <li class="page-item disabled" th:if="${item.pageItemType.name() == 'DOTS'}">
+                            <a class="page-link" href="#"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
+                        </li>
+                    </th:block>
+                    <li class="page-item" th:classappend="${!events.paging.isNextEnabled()? 'disabled' : ''}">
+                        <a class="page-link" th:href="@{'/tales/?pageNumber=' + ${events.paging.pageNumber + 1}}">
+                            <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                    </li>
+                </ul>
+                <!--/nav-->
+
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- Blog Post End here -->
+
+
+
+<!-- Footer Start here -->
+<footer th:insert="~{index :: footer}"></footer>
+<a class="page-scroll scroll-top" href="#scroll-top"><i class="fa fa-angle-up" aria-hidden="true"></i></a>
+<!-- Footer End here -->
+
+
+<!-- jquery -->
+<section th:insert="~{index :: js}"></section>
+<script>
+    function deleteConfirm(e) {
+        if (confirm('Удалить?')) {
+            return true;
+        } else {
+            e.preventDefault();
+        }
+    };
+</script>
+
+</body>
+
+</html>

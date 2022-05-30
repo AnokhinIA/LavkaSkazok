@@ -32,5 +32,37 @@
         </createTable>
     </changeSet>
 
-
+    <changeSet author="Igor Anokhin" id="Create-table-events">
+        <preConditions>
+            <not>
+                <tableExists tableName="events"/>
+            </not>
+        </preConditions>
+        <createTable tableName="events">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="date" type="date">
+                <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="title" type="varchar(100)">
+                <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="annonce" type="varchar(1000)">
+                <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="address" type="varchar(100)">
+                <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="type" type="varchar(50)">
+                <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="report" type="text">
+                <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="image_name" type="varchar(50)">
+                <constraints nullable="true" unique="false"/>
+            </column>
+        </createTable>
+    </changeSet>
 </databaseChangeLog>

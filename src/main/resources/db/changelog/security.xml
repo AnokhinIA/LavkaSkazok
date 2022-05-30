@@ -33,4 +33,5 @@
             <column name="PASSWORD" value="$2a$10$Gq4Gjp73EBMFcm4Bq5G7i..XCUfMif5u69EvJKCaJlNVzvzZb2lVO" />
         </insert>
     </changeSet>
+
 </databaseChangeLog>

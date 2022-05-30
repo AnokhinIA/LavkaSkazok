@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:insert="~{index :: head}"></head>
+
+<body id="scroll-top">
+<!-- mobile menu start here -->
+<div th:insert="~{index :: mobile-menu-area}" class="mobile-menu-area"></div>
+<!-- mobile menu ending here -->
+
+<header th:insert="~{index :: header}"></header>
+<!-- header End here -->
+
+
+<!-- Page Header Start here -->
+<section class="page-header section-notch">
+    <div class="overlay">
+        <div class="container">
+            <h3>Мои занятия</h3>
+            <h3 th:text="${message}"></h3>
+            <ul>
+                <li><a th:href="@{/}">На главную</a></li>
+                <li>-</li>
+                <li>-</li>
+            </ul>
+        </div>
+        <!-- container -->
+    </div><!-- overlay -->
+</section><!-- page header -->
+<!-- Page Header End here -->
+
+
+<!-- Blog Post Start here -->
+<section class="blog-post padding-120">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                  <div class="single-post">
+                    <div class="post-content">
+                        <h3>Игра по-Бахотскому</h3>
+                        <p>
+                            Вы можете пригласить меня в свое пространство для проведения игрового дня рождения, игры для
+                            группы детей или
+                            посетить одну из игр, которую я провожу.
+                        </p>
+                        <p> Игровое день рождения - от 20 тыс. р.</p>
+                        <p> Участие в игре Стоимость - 1500 руб.</p>
+                        <p>Ближайшие игры:</p>
+                        <ul>
+                            <li>01 июня, Коммунарака, 12:30- 14:30, возраст 6-10 лет.</li>
+                            <li>08 июня, Коммунарака, 12:30- 14:30, возраст 6-10 лет.</li>
+                            <li>15 июня, Коммунарака, 12:30- 14:30, возраст 6-10 лет.</li>
+                            <li>22 июня, Коммунарака, 12:30- 14:30, возраст 6-10 лет.</li>
+                            <li>29 июня, Коммунарака, 12:30- 14:30, возраст 6-10 лет.</li>
+                        </ul>
+
+                    </div>
+                    <div class="post-content">
+                        <h3>Заказать сказку</h3>
+                        <p>
+                            По Вашему запросу и конкретной ситуации я напишу "полезную" терапевтическую, медитативную
+                            сказку для ребенка или взрослого.
+                        </p>
+                        <p> Стоимость консультации: 2000руб., стоимость сказки в зависимости от запроса и сложности - от
+                            1500руб.
+                        </p>
+
+                    </div>
+                    <div class="post-content">
+                        <h3>Индивидуальная коррекционная игра (игротерапия)</h3>
+                        <p>
+                            Вы можете обратиться ко мне с запросом (сложная ситуация, проработка страхов, поведенческие
+                            проблемы и т.п.) по проведению
+                            игротерапевтических занятий с ребенком.
+
+                        </p>
+                        <p>
+                            Стоимость консультации для оформления запроса - 3000руб. стоимость одного занятия - 2000руб.
+                        </p>
+
+
+                    </div>
+                    <div class="post-content">
+                        <h3>Кукольные спектакли</h3>
+                        <p>
+                            По сюжетам моих сказок мы ставим кукольные спектакли. Все герои и декорации выполняются
+                            вручную.
+                        </p>
+                        <p>
+                            Ближайший спектакль состоится 2 июля в Коммунарке на открытии парка Туве Янсон в рамках
+                            фестиваля "Дом".
+                            Точное время проведения будет уточнено позднее.
+                            Участие в спектакле - бесплатное.
+                        </p>
+                    </div>
+                </div><!-- single post -->
+            </div>
+
+
+            <!-- Footer Start here -->
+            <footer th:insert="~{index :: footer}"></footer>
+            <a class="page-scroll scroll-top" href="#scroll-top"><i class="fa fa-angle-up" aria-hidden="true"></i></a>
+            <!-- Footer End here -->
+
+        </div>
+    </div>
+</section>
+<!-- jquery -->
+<section th:insert="~{index :: js}"></section>
+
+</body>
+
+</html>

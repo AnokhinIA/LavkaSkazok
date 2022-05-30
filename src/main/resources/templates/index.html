@@ -6,12 +6,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="yandex-verification" content="e8a69984ac09471e" />
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Лавка сказок</title>
     <link th:href="@{/images/favicon.png}" rel="shortcut icon" type="image/vnd.microsoft.icon"/>
     <link th:href="@{/assets/css/fonts_googleapis_com.css}" rel="stylesheet">
     <!-- Bootstrap -->
-    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/assets/css/bootstrap.min.css}" rel="stylesheet">
     <!-- Font-awesome -->
     <link th:href="@{/assets/css/font-awesome.min.css}" rel="stylesheet">
     <!-- Flaticon -->
@@ -52,6 +53,7 @@
         <ul class="m-menu">
             <li><a th:href="@{/}">Главная</a></li>
             <li><a th:href="@{/about}">Обо мне</a></li>
+            <li><a th:href="@{/projects}">Занятия</a></li>
             <li><a th:href="@{/shedule}">Расписание</a></li>
             <li><a href="#">Галерея</a></li>
             <li><a th:href="@{/tales}">Сказки</a></li>
@@ -105,6 +107,7 @@
                         <ul class="menu">
                             <li><a th:href="@{/}">Главная</a></li>
                             <li><a th:href="@{/about}">Обо мне</a></li>
+                            <li><a th:href="@{/projects}">Занятия</a></li>
                             <li><a th:href="@{/shedule}">Расписание</a></li>
                             <li><a href="#">Галерея</a></li>
                             <li><a th:href="@{/tales}">Сказки</a></li>
@@ -130,11 +133,11 @@
                 <div class="banner-overlay"></div>
                 <div class="container">
                     <div class="banner-content">
-                        <h3>Добро пожаловать в Игру</h3>
+                        <h3>Добро пожаловать в Лавка Сказок</h3>
                         <h2>Лучшее для развития ребенка</h2>
-                        <p>Игры, Сказкотерапия.</p>
+                        <p>Игра по-Бахотскому, Сказкотерапия, Кукольные спектакли.</p>
                         <ul>
-                            <li><a href="#" class="button-default">Узнать больше</a></li>
+                            <li><a th:href="@{/projects}" class="button-default">Записаться</a></li>
                         </ul>
                     </div><!-- banner-content -->
                 </div><!-- container -->
